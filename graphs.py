@@ -120,6 +120,3 @@ def in_degree_distribution(digraph):
             degree_dict[degree] = degree_list[degree]
         
     return degree_dict
-
-#print in_degree_distribution(GRAPH0)
-#print compute_in_degree(GRAPH0)
