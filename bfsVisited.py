@@ -84,9 +84,21 @@ def compute_resilience(ugraph,attack_order):
     """
     lcc_list = []
     
+    lcc_list.append(largest_cc_size(ugraph))
+    print lcc_list
+    for node in attack_order:
+        node_set = ugraph.pop(node)
+        edge_list = list(node_set)
+        for edge in edge_list:
+            temp_set = ugraph.pop(edge)
+            temp_set.discard(node)
+            ugraph[edge] = temp_set
+
+        lcc_list.append(largest_cc_size(ugraph))
     
     return lcc_list
 
 #print bfs_visited(GRAPH5,"monkey")
 #print cc_visited(GRAPH5)
-print largest_cc_size(GRAPH0)
+#print largest_cc_size(GRAPH0)
+print compute_resilience(GRAPH0,[1,2])
