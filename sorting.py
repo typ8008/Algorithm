@@ -61,6 +61,16 @@ def insertion_sort(input_list):
     
     return list_copy
 
+def reverse_list(num_elements):
+    """
+    Input: takes number of elements
+    Output: list with reversed ordered of elements
+    """
+    elements_list = list(range(num_elements))
+    elements_list.reverse()
+    return elements_list
+
+
 def random_list(num_elements):
     """
     Input: takes number of elements
@@ -80,18 +90,18 @@ def running_time(max_num):
     ins_list = [] 
     
     for num in range(max_num):
-        unsorted_list = random_list(num)
-
-        start = timer()
-        insertion_sort(unsorted_list)
-        stop = timer()
-        ins_list.append(stop - start)
+        #unsorted_list = random_list(num)
+        unsorted_list = reverse_list(num)
 
         start = timer()
         selection_sort(unsorted_list)
         stop = timer()
         sel_list.append(stop - start)
      
+        start = timer()
+        insertion_sort(unsorted_list)
+        stop = timer()
+        ins_list.append(stop - start)
 
         
     return (sel_list, ins_list)
@@ -108,11 +118,9 @@ def graph_plot(sel_list, ins_list):
         return
     
     idx = range(len(sel_list))
-    
-        
+            
     plt.plot(idx,sel_list,'b', label='selection sort')
-    plt.plot(idx,ins_list,'r', label='insertion sort')
-    
+    plt.plot(idx,ins_list,'r', label='insertion sort')    
 
     plt.title("Selection Sort vs Insertion Sort")
     plt.ylabel("Running time [s]")
@@ -122,6 +130,8 @@ def graph_plot(sel_list, ins_list):
     plt.show()
 
 
-run_time = running_time(3000)
-
+# Crete runtime list of algorithms
+run_time = running_time(1000)
+# Plot running time vs input size
 graph_plot(run_time[0], run_time[1])
+
